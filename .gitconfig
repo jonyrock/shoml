@@ -1,0 +1,8 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = User
+#	email = user@space-hack-dfw1-16
+[user]
+	email = ping@corpglory.com
+	name = greenglorybot
