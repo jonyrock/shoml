@@ -9,7 +9,7 @@ out_path = sys.argv[2]
 
 root_dir = "../"
 data_dir = root_dir + "shoml_data/"
-csv_file = "athletic_flatten.csv"
+csv_file = data_dir + "athletic_flatten.csv"
 features_dir = root_dir + "features/"
 input_filename = path
 features_filename = path + ".f"
@@ -27,25 +27,27 @@ os.system("python test.py " + input_filename + " " + features_filename)
 
 
 image_array = load_array(features_filename)
-
+print image_array
 
 result = []
 
 with open(csv_file) as list_file:
-    reader = csv.reader(csv_file, delimiter=' ')
-    for row in reader:
-        name = row[0]
-        url = row[1]
+    for row in list_file.readlines():
+        tokens = row.split(' ')
+        name = tokens[0]
+        url = tokens[1]
         filename = features_dir + name + ".jpg.f"
-        if not os.path.exists(features_dir + filename):
+        #print(filename)
+        if not os.path.exists(filename):
             continue
-        current_array = load_array(features_dir + filename)
-        mod = np.product(current_array)
-        if mod > 0.:
-            cur_dist = float(np.dot(image_array, current_array)) / np.product(current_array)
-            result.append([cur_dist, url])
+        current_array = load_array(filename)
+        mod = np.sqrt(np.dot(current_array, current_array))
+        
+        cur_dist = float(np.dot(image_array, current_array)) / mod
+        result.append([cur_dist, name, url])
 
 result.sort()
+result.reverse()
 size = min(10, len(result))
 for i in range(size):
-    print(result[i][1])
+    print(result[i])
