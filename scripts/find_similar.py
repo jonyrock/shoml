@@ -10,7 +10,8 @@ out_path = path + ".json"
 root_dir = "/home/user/"
 scripts_path = root_dir + "scripts/"
 data_dir = root_dir + "shoml_data/"
-csv_file = data_dir + "athletic_flatten.csv"
+csv_file1 = data_dir + "athletic_flatten.csv"
+csv_file2 = data_dir + "nike_mj_flatten.csv"
 features_dir = root_dir + "features/"
 input_filename = path
 features_filename = path + ".f"
@@ -31,19 +32,24 @@ image_array = load_array(features_filename)
 
 weights = []
 
-with open(csv_file) as list_file:
-    for row in list_file.readlines():
-        tokens = row.strip().split(' ')
-        name = tokens[0]
-        url = tokens[1]
-        filename = features_dir + name + ".jpg.f"
-        if not os.path.exists(filename):
-            continue
-        current_array = load_array(filename)
-        mod = np.sqrt(np.dot(current_array, current_array))
-        
-        cur_dist = float(np.dot(image_array, current_array)) / mod
-        weights.append([cur_dist, name, url])
+def process_file(csv_file):
+    global weights
+    with open(csv_file) as list_file:
+        for row in list_file.readlines():
+            tokens = row.strip().split(' ')
+            name = tokens[0]
+            url = tokens[1]
+            filename = features_dir + name + ".jpg.f"
+            if not os.path.exists(filename):
+                continue
+            current_array = load_array(filename)
+            mod = np.sqrt(np.dot(current_array, current_array))
+
+            cur_dist = float(np.dot(image_array, current_array)) / mod
+            weights.append([cur_dist, name, url])
+
+process_file(csv_file1)
+process_file(csv_file2)
 
 weights.sort()
 weights.reverse()
