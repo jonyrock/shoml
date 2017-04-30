@@ -6,14 +6,13 @@
       <input type="button" value="Upload" />
     </form>
     <progress></progress>
-    <!-- <form action="/upload" method="post" enctype="multipart/form-data">
-      Select image to upload:
-      <input type="file" name="file" id="file">
-      <input type="submit" value="Upload Image" name="submit">
-    </form> -->
 
-    <div v-if="results">
-      
+    <div v-if="results" id="results">
+      <hr/>
+      <div v-for="item in results.candidates">
+        <img :src="item.image" /> <br/>
+        <small>w: {{ item.weight.toFixed(3) }}</small>
+      </div>
     </div>
   </div>
 </template>
@@ -23,13 +22,18 @@
 const $ = require('jquery');
 export default {
   mounted: function() {
+    var _this = this;
+
     var $file = $(this.$el).find(':file');
     var $progress = $(this.$el).find('progress');
+
+    this.$file = $file;
+    this.$progress = $progress;
     $file.on('change', function() {
       var file = this.files[0];
     });
 
-    var _this = this;
+
     $(this.$el).find(':button').on('click', function() {
       $.ajax({
           // Your server script to process the upload
@@ -67,7 +71,7 @@ export default {
             } else {
               console.log('ERRORS: ' + data.error);
             }
-        },
+          },
       });
     });
   },
@@ -76,9 +80,21 @@ export default {
     return {
       results: undefined
     }
+  },
+  methods: {
+    getResults: function(data) {
+      this.results = data;
+      this.$file.val();
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
+  #results img{
+    width: 200px;
+  }
+  #results small {
+    color: gray;
+  }
 </style>
