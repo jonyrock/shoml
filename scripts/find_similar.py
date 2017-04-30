@@ -10,8 +10,8 @@ out_path = path + ".json"
 root_dir = "/home/user/"
 scripts_path = root_dir + "scripts/"
 data_dir = root_dir + "shoml_data/"
-csv_file1 = data_dir + "athletic_flatten.csv"
-csv_file2 = data_dir + "nike_mj_flatten.csv"
+csv_file1 = data_dir + "database.csv"
+#csv_file2 = data_dir + "nike_mj_flatten.csv"
 features_dir = root_dir + "features/"
 input_filename = path
 features_filename = path + ".f"
@@ -49,7 +49,7 @@ def process_file(csv_file):
             weights.append([cur_dist, name, url])
 
 process_file(csv_file1)
-process_file(csv_file2)
+#process_file(csv_file2)
 
 weights.sort()
 weights.reverse()
