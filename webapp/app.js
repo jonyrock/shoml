@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/static', express.static(path.join(PATH_CLIENT, 'static')));
 
-app.get('/', f{"candidates": unction (req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(PATH_CLIENT, 'index.html'));
 });
 
