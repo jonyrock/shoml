@@ -8,6 +8,7 @@ out_path = path + ".json"
 
 
 root_dir = "/home/user/"
+scripts_path = root_dir + "scripts/"
 data_dir = root_dir + "shoml_data/"
 csv_file = data_dir + "athletic_flatten.csv"
 features_dir = root_dir + "features/"
@@ -23,7 +24,7 @@ def load_array(filename):
 
 
 
-os.system("python test.py " + input_filename + " " + features_filename)
+os.system("python " + scripts_path + " test.py " + input_filename + " " + features_filename)
 
 
 image_array = load_array(features_filename)
