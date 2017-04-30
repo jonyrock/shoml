@@ -18,3 +18,7 @@ data.zip
 features/
 infra/
 shoml_data/
+*.pyc
+*.save
+*.py~
+.pycharm_helpers
