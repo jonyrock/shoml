@@ -1,8 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser');
-const path = require('path');
+const solver = require('./solver');
+const config = require('./config');
+
 const multer = require('multer');
-const config = require('./config')
+const bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
 
 
 const PATH_CLIENT = path.join(__dirname, 'client', 'dist');
@@ -21,9 +23,9 @@ app.get('/', function (req, res) {
 
 const upload = multer({ dest: PATH_UPLOAD });
 app.post('/upload/', upload.single('file'), function(req, res) {
-  console.log('uploaded a file');
-  console.log(req.file.path);
-  res.send('ok');
+  solver(req.file.path, sr => {
+    res.json(sr);
+  });
 });
 
 
