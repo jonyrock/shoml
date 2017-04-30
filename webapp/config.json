@@ -1,3 +1,4 @@
 {
-  "defaultPort": 3003
+  "defaultPort": 3003,
+  "uploadsDir": "public/uploads"
 }

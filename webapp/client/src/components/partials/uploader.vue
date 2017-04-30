@@ -1,0 +1,23 @@
+<template>
+  <div style="position:relative;">
+    <a class='btn btn-primary' href='javascript:;'>
+      Choose File...
+      <input
+        type="file"
+        style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
+        name="file_source" size="40"
+        v-model="fileStatus"
+      >
+    </a>
+    <br/>
+    <span class='label label-info'> {{fileStatus}} </span>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style>
+</style>
