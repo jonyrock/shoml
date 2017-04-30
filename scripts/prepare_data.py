@@ -21,7 +21,8 @@ with open(list_filename) as list_file:
                 for fname in fileList:
                     full_path = os.path.join(os.path.abspath(dirName), fname)
 
+                    name = fname.split(".")[0]
                     file_extension = os.path.splitext(fname)[1]
                     if file_extension == '.jpg':
-                        out_file.write(fname + " http://142.0.206.116:3001/" + dir_name + fname + "\n")
+                        out_file.write(name + " http://142.0.206.116:3001/" + dir_name + fname + "\n")
 
