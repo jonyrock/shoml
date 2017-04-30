@@ -56,4 +56,4 @@ for i in range(size):
     })
 
 with open(out_path, "w+") as file:
-    file.write(json.dumps(result, ensure_ascii=False))
+    file.write(json.dumps({'candidates': result}, ensure_ascii=False))
