@@ -24,7 +24,7 @@ def load_array(filename):
 
 
 
-os.system("python " + scripts_path + " test.py " + input_filename + " " + features_filename)
+os.system("python " + scripts_path + "test.py " + input_filename + " " + features_filename)
 
 
 image_array = load_array(features_filename)
