@@ -9,6 +9,8 @@ function solver(imgPath, callback) {
   var command = EXEC_PREFIX + ' ' + imgPath;
   exec(command, function (error, stdout, stderr) {
     if (error !== null) {
+      console.log('ERROR, bro!');
+      console.log(error);
       callback({ error: error });
     }
     console.log('Solved ' + imgPath);
