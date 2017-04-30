@@ -1,21 +1,38 @@
 <template>
   <div style="position:relative;">
-    <a class='btn btn-primary' href='javascript:;'>
-      Choose File...
-      <input
-        type="file"
-        style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'
-        name="file_source" size="40"
-        v-model="fileStatus"
-      >
-    </a>
-    <br/>
-    <span class='label label-info'> {{fileStatus}} </span>
+    <!-- <vuc
+
+      title="Add a photo with shoe"
+      postAction='/upload'
+    /> -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      Select image to upload:
+      <input type="file" name="file" id="file">
+      <input type="submit" value="Upload Image" name="submit">
+    </form>
   </div>
 </template>
 
 <script>
 export default {
+  data: function () {
+    return {
+      events: {
+        progress(file, component) {
+            console.log('progress ' + file.progress);
+        },
+        after(file, component) {
+            console.log('after');
+        },
+        before(file, component) {
+            console.log('before');
+        }
+      }
+    }
+  },
+  components: {
+    vuc: require('vue-upload-component')
+  }
 }
 </script>
 

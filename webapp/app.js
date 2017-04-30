@@ -6,6 +6,8 @@ const config = require('./config')
 
 
 const PATH_CLIENT = path.join(__dirname, 'client', 'dist');
+const PATH_UPLOAD = path.join(__dirname, 'uploads');
+
 
 var app = express();
 
@@ -17,11 +19,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(PATH_CLIENT, 'index.html'));
 });
 
-
-const upload = multer({ dest: config.uploadsPath });
+const upload = multer({ dest: PATH_UPLOAD });
 app.post('/upload/', upload.single('file'), function(req, res) {
   console.log('uploaded a file');
   console.log(req.file.path);
+  res.send('ok');
 });
 
 
