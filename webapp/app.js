@@ -23,7 +23,9 @@ app.get('/', function (req, res) {
 
 const upload = multer({ dest: PATH_UPLOAD });
 app.post('/upload/', upload.single('file'), function(req, res) {
-  //res.sendFile(path.join(__dirname, 'shitres.json'))
+  // setTimeout(() => {
+  //   res.sendFile(path.join(__dirname, 'shitres.json'))
+  // }, 4000);
   solver(req.file.path, sr => {
     res.sendFile(req.file.path + '.json');
   });

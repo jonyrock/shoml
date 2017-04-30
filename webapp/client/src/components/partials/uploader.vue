@@ -3,7 +3,9 @@
 
     <form enctype="multipart/form-data">
       <input name="file" type="file" />
-      <input type="button" value="Upload" />
+
+      <input v-if="!loading" type="button" value="Upload" />
+      <span v-if="loading" type="button" value="Upload"> Loading </span>
     </form>
     <progress></progress>
 
@@ -11,7 +13,7 @@
       <hr/>
       <div v-for="item in results.candidates">
         <img :src="item.image" /> <br/>
-        <small>w: {{ item.weight.toFixed(3) }}</small>
+        <small> n: {{ item.name }} w: {{ item.weight.toFixed(3) }}</small>
       </div>
     </div>
   </div>
@@ -35,6 +37,8 @@ export default {
 
 
     $(this.$el).find(':button').on('click', function() {
+      _this.results = undefined;
+      _this.loading = true;
       $.ajax({
           // Your server script to process the upload
           url: '/upload',
@@ -67,7 +71,7 @@ export default {
           },
           success: function(data, textStatus, jqXHR) {
             if(typeof data.error === 'undefined') {
-              _this.results = data;
+              _this.getResults(data);
             } else {
               console.log('ERRORS: ' + data.error);
             }
@@ -78,13 +82,15 @@ export default {
 
   data: function() {
     return {
-      results: undefined
+      results: undefined,
+      loading: false
     }
   },
   methods: {
     getResults: function(data) {
+      this.loading = false;
       this.results = data;
-      this.$file.val();
+      this.$file.val('');
     }
   }
 }
