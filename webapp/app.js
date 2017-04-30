@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 const upload = multer({ dest: PATH_UPLOAD });
 app.post('/upload/', upload.single('file'), function(req, res) {
   solver(req.file.path, sr => {
-    res.json(sr);
+    res.sendFile(req.file.path + '.json');
   });
 });
 

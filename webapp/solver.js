@@ -1,7 +1,7 @@
 const exec = require('child_process').exec;
 const path = require('path');
 
-const SCRIPT_PATH = path.join(__dirname, '..', 'scripts', 'find_image_id.py');
+const SCRIPT_PATH = path.join(__dirname, '..', 'scripts', 'find_similar.py');
 const EXEC_PREFIX = 'python ' + SCRIPT_PATH;
 
 
@@ -11,9 +11,8 @@ function solver(imgPath, callback) {
     if (error !== null) {
       callback({ error: error });
     }
-    var id = +stdout;
-    console.log('Solved ' + imgPath + ' -> ' + id);
-    callback({ id: +stdout });
+    console.log('Solved ' + imgPath);
+    callback('ok');
   });
 }
 
