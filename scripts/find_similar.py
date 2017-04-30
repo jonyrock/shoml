@@ -7,7 +7,7 @@ path = sys.argv[1]
 out_path = path + ".json"
 
 
-root_dir = "../"
+root_dir = "/home/user/"
 data_dir = root_dir + "shoml_data/"
 csv_file = data_dir + "athletic_flatten.csv"
 features_dir = root_dir + "features/"
